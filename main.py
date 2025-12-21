@@ -1,7 +1,47 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, Header, Button
-from textual.containers import Grid
+from textual.widgets import Footer, Header, Button, Label
+from textual.containers import Grid, Vertical, Center
 import datetime
+from textual.screen import Screen
+
+class DayScreen(Screen):
+    # screen for day of advent calendar
+    
+    CSS = """
+    #dialog {
+        width: 50;
+        height: auto;
+        border: thick $primary;
+        background: $surface;
+        padding: 2;
+        align: center middle;
+    }
+    
+    #dialog Label {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1;
+    }
+    
+    #dialog Button {
+        width: auto;
+    }
+    """
+    
+    def __init__(self, day: int) -> None:
+        self.day = day
+        super().__init__()
+        
+    def compose(self) -> ComposeResult:
+        with Vertical(id="dialog"):
+            yield Label(f"This is a test popup for day {str(self.day)}")
+            with Center():
+                yield Button("Close", id="close")
+                
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        self.dismiss()
+        event.stop()
+        
 
 class AdventCalendarApp(App):
     # A textual app for an advent calendar
@@ -46,8 +86,7 @@ class AdventCalendarApp(App):
         
         if not button.has_class("opened"):
             button.add_class("opened")
-            day = button.label
-            self.notify(f"Day {day} opened!")
+        self.push_screen(DayScreen(int(day)))
         
     def action_toggle_dark(self) -> None:
         self.theme = (
