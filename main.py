@@ -91,7 +91,7 @@ class AdventCalendarApp(App):
     }
     """
     
-    BINDINGS = [("d", "toggle_dark", "Toggle Dark/Light Mode"), ("c", "action_countdown", "Show Countdown")]
+    BINDINGS = [("d", "toggle_dark", "Toggle Dark/Light Mode"), ("c", "countdown", "Show Countdown")]
     
     START_DATE = datetime.date(2025, 12, 1)
     
@@ -122,7 +122,7 @@ class AdventCalendarApp(App):
         )
         
     def action_countdown(self) -> None:
-        days_left = int(25) - datetime.date.today().days
+        days_left = int(25) - datetime.date.today().day
         self.notify(f"{days_left} days until Christmas!")
         
             
