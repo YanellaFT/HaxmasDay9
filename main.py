@@ -29,18 +29,30 @@ class DayScreen(Screen):
     """
     
     gifts = {
-        1: "React Workshop!",
-        2: "Fusering Workshop!",
-        3: "Keyring with Onshape!",
-        4: "Hono Backend!",
-        5: "Full Stack App with Flask!",
-        6: "3D Printable Ruler!",
-        7: "Interactive Christmas Tree!",
-        8: "Automating Cookie Clicker!",
-        9: "TUI in Textual!",
-        10: "No leeks",
-        11: "No leeks",
-        12: "No leeks"
+        1: "It's finally December! Let's count down to Christmas together. \n🎄🎄🎄",
+        2: "Sign up for Aces :)",
+        3: "Get someone to sign up for Aces",
+        4: "Which one of Santa's reindeer has bad manners? \nRude-olph! \n🦌🦌🦌",
+        5: "Sing some of your favorite holiday songs with your friends! \n🎶🎶🎶",
+        6: "Go treat yourself to some hot cocoa! \n🍫🥛",
+        7: "What do Santa's helpers lean in school? \nthe elf-abet!",
+        8: "Bake some holiday cookies! \n🍪🍪🍪",
+        9: "What holiday song do wolves sing? \nWe wish y-ooooooooo-u a merry Christmas!",
+        10: "Create a holiday card for someone you care about! \n💝💝💝",
+        11: "How do snowmen shop online? \nThey use the winter-net! \n⛄⛄⛄",
+        12: "Do something to get you hyped for Haxmas starting tomorrow!",
+        13: "React Workshop! \nHaxmas has started!",
+        14: "Fusering Workshop! \nHaxmas Day 2",
+        15: "Keyring with Onshape! \nHaxmas Day 3",
+        16: "Hono Backend! \nHaxmas Day 4",
+        17: "Full Stack App with Flask! \nHaxmas Day 5",
+        18: "3D Printable Ruler! \nHaxmas Day 6",
+        19: "Interactive Christmas Tree! \nHaxmas Day 7",
+        20: "Automating Cookie Clicker! \nHaxmas Day 8",
+        21: "TUI in Textual! \nHaxmas Day 9",
+        22: "No leeks :3 \nHaxmas Day 10",
+        23: "No leeks <3 \nHaxmas Day 11",
+        24: "No leeks \nHaxmas Day 12 \nMerry Christmas!"
     }
     
     def __init__(self, day: int) -> None:
@@ -49,7 +61,7 @@ class DayScreen(Screen):
         
     def compose(self) -> ComposeResult:
         with Vertical(id="dialog"):
-            yield Label(f"Here's what's in day {str(self.day)}: {self.gifts.get(self.day)}")
+            yield Label(f"Dec {str(self.day)}, 2025: \n{self.gifts.get(self.day)}")
             with Center():
                 yield Button("Close", id="close")
                 
@@ -64,7 +76,7 @@ class AdventCalendarApp(App):
     
     CSS = """
     Grid {
-        grid-size: 4 3;
+        grid-size: 5 5;
         grid-gutter: 1 2;
     }
     Grid Button {
@@ -79,15 +91,15 @@ class AdventCalendarApp(App):
     }
     """
     
-    BINDINGS = [("d", "toggle_dark", "Toggle dark mode")]
+    BINDINGS = [("d", "toggle_dark", "Toggle Dark/Light Mode"), ("c", "countdown", "Show Countdown")]
     
-    START_DATE = datetime.date(2025, 12, 13)
+    START_DATE = datetime.date(2025, 12, 1)
     
     def compose(self) -> ComposeResult:
         # create child widgets for app
         yield Header()
         with Grid():
-            for day in range(1, 13):
+            for day in range(1, 26):
                 yield Button(str(day), id=f"day-{day}")
         yield Footer()
         
@@ -108,6 +120,11 @@ class AdventCalendarApp(App):
         self.theme = (
             "textual-dark" if self.theme == "textual-light" else "textual-light"
         )
+        
+    def countdown(self) -> None:
+        days_left = self.START_DATE - datetime.date.today().days
+        self.notify(f"{days_left} days until Christmas!")
+        
             
 def main():
     app = AdventCalendarApp()
