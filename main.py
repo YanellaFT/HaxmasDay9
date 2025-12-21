@@ -28,19 +28,35 @@ class DayScreen(Screen):
     }
     """
     
+    gifts = {
+        1: "React Workshop!",
+        2: "Fusering Workshop!",
+        3: "Keyring with Onshape!",
+        4: "Hono Backend!",
+        5: "Full Stack App with Flask!",
+        6: "3D Printable Ruler!",
+        7: "Interactive Christmas Tree!",
+        8: "Automating Cookie Clicker!",
+        9: "TUI in Textual!",
+        10: "No leeks",
+        11: "No leeks",
+        12: "No leeks"
+    }
+    
     def __init__(self, day: int) -> None:
         self.day = day
         super().__init__()
         
     def compose(self) -> ComposeResult:
         with Vertical(id="dialog"):
-            yield Label(f"This is a test popup for day {str(self.day)}")
+            yield Label(f"Here's what's in day {str(self.day)}: {self.gifts.get(self.day)}")
             with Center():
                 yield Button("Close", id="close")
                 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         self.dismiss()
         event.stop()
+        
         
 
 class AdventCalendarApp(App):
