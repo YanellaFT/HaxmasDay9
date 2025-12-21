@@ -91,9 +91,10 @@ class AdventCalendarApp(App):
     }
     """
     
-    BINDINGS = [("d", "toggle_dark", "Toggle Dark/Light Mode"), ("c", "countdown", "Show Countdown")]
+    BINDINGS = [("d", "toggle_dark", "Toggle Dark/Light Mode"), ("c", "action_countdown", "Show Countdown")]
     
     START_DATE = datetime.date(2025, 12, 1)
+    CHRISTMAS_DATE = datetime.date(2025, 12, 25)
     
     def compose(self) -> ComposeResult:
         # create child widgets for app
@@ -121,8 +122,8 @@ class AdventCalendarApp(App):
             "textual-dark" if self.theme == "textual-light" else "textual-light"
         )
         
-    def countdown(self) -> None:
-        days_left = self.START_DATE - datetime.date.today().days
+    def action_countdown(self) -> None:
+        days_left = 25 - datetime.date.today().days
         self.notify(f"{days_left} days until Christmas!")
         
             
