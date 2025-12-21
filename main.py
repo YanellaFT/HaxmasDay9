@@ -1,6 +1,7 @@
 from textual.app import App, ComposeResult
 from textual.widgets import Footer, Header, Button
 from textual.containers import Grid
+import datetime
 
 class AdventCalendarApp(App):
     # A textual app for an advent calendar
@@ -24,6 +25,8 @@ class AdventCalendarApp(App):
     
     BINDINGS = [("d", "toggle_dark", "Toggle dark mode")]
     
+    START_DATE = datetime.date(2025, 12, 13)
+    
     def compose(self) -> ComposeResult:
         # create child widgets for app
         yield Header()
@@ -34,6 +37,13 @@ class AdventCalendarApp(App):
         
     def on_button_pressed(self, event: Button.Pressed) -> None:
         button = event.button
+        day = str(button.label)
+        unlock_day = self.START_DATE + datetime.timedelta(days=int(day)-1)
+        
+        if datetime.date.today() < unlock_day:
+            self.notify(f"You will be able to unlock day {day} on {unlock_day}")
+            return None
+        
         if not button.has_class("opened"):
             button.add_class("opened")
             day = button.label
