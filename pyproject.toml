@@ -22,4 +22,4 @@ Homepage = "https://github.com/YanellaFT/HaxmasDay9"
 Issues = "https://github.com/YanellaFT/HaxmasDay9/issues"
 
 [project.scripts]
-advent-calendar = "haxmasDay9_Allenay"
+advent-calendar = "haxmasDay9_Allenay:main”
