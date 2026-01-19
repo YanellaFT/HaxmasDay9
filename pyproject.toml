@@ -3,22 +3,11 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "haxmasDay9_Allenay"
+name = "haxmas_day_9_Allenay"
 version = "0.0.1"
-authors = [
-  { name="Yanella", email="yanellaft@gmail.com" },
+dependencies = [
+    "textual",
 ]
-description = "Haxmas Day 9: Advent Calendar"
-readme = "README.md"
-requires-python = ">=3"
-classifiers = [
-    "Programming Language :: Python :: 3"
-]
-license = "MIT"
-license-files = ["LICEN[CS]E*"]
-
-[project.urls]
-Homepage = "https://github.com/YanellaFT/HaxmasDay9"
 
 [project.scripts]
-advent-calendar = "src/haxmasDay9_Allenay:main.py”
+advent-calendar = "haxmas_day_9_Allenay.main:main"
