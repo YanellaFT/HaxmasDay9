@@ -10,7 +10,7 @@ authors = [
 ]
 description = "Haxmas Day 9: Advent Calendar"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3"
 classifiers = [
     "Programming Language :: Python :: 3"
 ]
@@ -19,7 +19,6 @@ license-files = ["LICEN[CS]E*"]
 
 [project.urls]
 Homepage = "https://github.com/YanellaFT/HaxmasDay9"
-Issues = "https://github.com/YanellaFT/HaxmasDay9/issues"
 
 [project.scripts]
-advent-calendar = "haxmasDay9_Allenay:main”
+advent-calendar = "src/haxmasDay9_Allenay:main.py”
