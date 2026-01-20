@@ -3,7 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "haxmasDay9_Allenay"version = "0.0.1"
+name = "haxmasDay9_Allenay"
+version = "0.0.1"
 dependencies = [
     "textual",
 ]
